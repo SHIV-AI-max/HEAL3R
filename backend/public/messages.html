@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Messages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .message {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .time {
+            color: #666;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Messages</h1>
+    <div id="messages"></div>
+
+    <script>
+        function fetchMessages() {
+            fetch('http://localhost:5000/api/messages')
+                .then(response => response.json())
+                .then(messages => {
+                    const messagesDiv = document.getElementById('messages');
+                    messagesDiv.innerHTML = '';
+                    messages.forEach(msg => {
+                        const time = new Date(msg.timestamp).toLocaleString();
+                        messagesDiv.innerHTML += `
+                            <div class="message">
+                                <p>${msg.message}</p>
+                                <div class="time">${time}</div>
+                            </div>
+                        `;
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Fetch messages immediately and then every 5 seconds
+        fetchMessages();
+        setInterval(fetchMessages, 5000);
+    </script>
+</body>
+</html>

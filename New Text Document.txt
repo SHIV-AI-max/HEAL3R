@@ -1,0 +1,4 @@
+vdIYK3HkB0nbbcAk
+bwubca23791_db_user
+
+mongodb+srv://bwubca23791_db_user:vdIYK3HkB0nbbcAk@anno.j0ydbb4.mongodb.net/?appName=anno
