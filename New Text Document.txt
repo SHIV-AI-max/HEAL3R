@@ -10,5 +10,6 @@ the massages should be seen below,
 weach massage box should ahave aview bbutton and a delete button
 view button should pop up a white box to display the massage on the same screen with a croos on top right, delete button should delete the massage rom databsae, in server.js i think the delete optin is already coded
 
-MASSAGE LINK: heal3r.netlify.app
-ADMIN LINK: shiv-admin.netlify.app
+MASSAGE LINK: https://heal3r.netlify.app/
+ADMIN LINK: https://heal3r-admin.netlify.app/
+SERVER LINK: https://heal3r.onrender.com

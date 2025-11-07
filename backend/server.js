@@ -22,6 +22,8 @@ function sendSseEvent(eventName, data) {
 // Middleware
 app.use(cors({
   origin: [
+    'https://heal3r-admin.netlify.app',
+    'https://heal3r.netlify.app',
     'http://localhost:5173',
     'http://localhost:4173',
     'http://localhost:3000',
