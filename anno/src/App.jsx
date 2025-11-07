@@ -1,13 +1,19 @@
 import { useState } from 'react'
 import './App.css'
 
+// Set API URL based on environment
+const API_URL =
+  import.meta.env.PROD
+    ? 'https://anno-6dyc.onrender.com/api/messages'
+    : 'http://localhost:5000/api/messages';
+
 function App() {
   const [message, setMessage] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      await fetch('/api/messages', {
+      await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

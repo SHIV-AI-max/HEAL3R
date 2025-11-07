@@ -2,3 +2,10 @@ vdIYK3HkB0nbbcAk
 bwubca23791_db_user
 
 mongodb+srv://bwubca23791_db_user:vdIYK3HkB0nbbcAk@anno.j0ydbb4.mongodb.net/?appName=anno
+
+
+promt Make a admin pannel for this massaging wesite,
+i just want a nav bar in admin panel, with just a logo in left, a refresh bubtton on right corner of nav bar,
+the massages should be seen below,
+weach massage box should ahave aview bbutton and a delete button
+view button should pop up a white box to display the massage on the same screen with a croos on top right, delete button should delete the massage rom databsae, in server.js i think the delete optin is already coded
