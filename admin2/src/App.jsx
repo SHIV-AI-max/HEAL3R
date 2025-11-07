@@ -4,6 +4,8 @@ import "./App.css";
 function App() {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [showInstall, setShowInstall] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [refreshing, setRefreshing] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState(null);
@@ -49,10 +51,36 @@ function App() {
   };
 
   useEffect(() => {
+    // Fetch messages once on mount. No polling — updates only on manual reload.
     fetchMessages();
-    const interval = setInterval(() => fetchMessages(), 5000);
-    return () => clearInterval(interval);
   }, []);
+
+  // No real-time subscription: UI will update only when user reloads the page.
+
+  // Capture the beforeinstallprompt event so we can show an install button
+  useEffect(() => {
+    const handler = (e) => {
+      // Prevent the mini-infobar from appearing on mobile
+      e.preventDefault();
+      setDeferredPrompt(e);
+      setShowInstall(true);
+      console.log('beforeinstallprompt captured');
+    };
+
+    window.addEventListener('beforeinstallprompt', handler);
+    return () => window.removeEventListener('beforeinstallprompt', handler);
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+    // Show the prompt
+    deferredPrompt.prompt();
+    const choiceResult = await deferredPrompt.userChoice;
+    console.log('User choice', choiceResult);
+    // Clear the saved prompt since it can only be used once
+    setDeferredPrompt(null);
+    setShowInstall(false);
+  };
 
   const filteredMessages = messages.filter(msg =>
     msg.message.toLowerCase().includes(searchTerm.toLowerCase())
@@ -103,6 +131,16 @@ function App() {
             </svg>
             <span className="refresh-text">Refresh</span>
           </button>
+          {showInstall && (
+            <button onClick={handleInstallClick} className="install-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 2v10"></path>
+                <path d="M5 9l7-7 7 7"></path>
+                <path d="M5 22h14"></path>
+              </svg>
+              Install
+            </button>
+          )}
         </div>
       </nav>
 

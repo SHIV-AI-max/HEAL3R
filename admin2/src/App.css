@@ -127,6 +127,24 @@ body {
   color: #000000;
 }
 
+.install-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  margin-left: 0.5rem;
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.install-btn:hover {
+  background: #059669;
+}
+
 /* === Search Container === */
 .search-container {
   max-width: 1280px;
